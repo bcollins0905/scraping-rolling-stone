@@ -103,29 +103,29 @@ var app = express();
 // A GET route for scraping the echojs website
 // app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("https://www.rollingstone.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    // console.log(response)
-    var $ = cheerio.load(response.data);
+  // axios.get("https://www.rollingstone.com/").then(function(response) {
+  //   // Then, we load that into cheerio and save it to $ for a shorthand selector
+  //   // console.log(response)
+  //   var $ = cheerio.load(response.data);
 
-    // // Now, we grab every h2 within an article tag, and do the following:
-    $("article div").each(function(i, element) {
-    //console.log(element)   
-    // Save an empty result object
-      var result = {};
-    //   // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("div")
-        .text()
-        .trim();
+  //   // // Now, we grab every h2 within an article tag, and do the following:
+  //   $("article div").each(function(i, element) {
+  //   //console.log(element)   
+  //   // Save an empty result object
+  //     var result = {};
+  //   //   // Add the text and href of every link, and save them as properties of the result object
+  //     result.title = $(this)
+  //       .children("div")
+  //       .text()
+  //       .trim();
 
-      result.link = $(this)
-        .parent("a")
-        .attr("href");
+  //     result.link = $(this)
+  //       .parent("a")
+  //       .attr("href");
   
       
-      result.summary = $(this)
-        .children("p")
+  //     result.summary = $(this)
+  //       .children("p")
       // Create a new Article using the `result` object built from scraping
       // db.Article
       //   .create(result)
@@ -137,11 +137,11 @@ var app = express();
       //     // If an error occurred, send it to the client
       //     res.json(err);
       //   });
-    console.log(result) 
+  //   console.log(result) 
 
-    });
+  //   });
 
-  });
+  // });
 // })
 // Route for getting all Articles from the db
 // app.get("/articles", function(req, res) {

@@ -22,10 +22,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/rollingStoneScrape", {
-  useMongoClient: true
-});
+
+// Set Handlebars.
+// var exphbs = require("express-handlebars");
+
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
+
+
+if(process.env.NODE_ENV == 'production'){
+  mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds239557.mlab.com:39557/heroku_8tdr566p');
+}
+else{
+  mongoose.connect("mongodb://localhost/rollingStoneScrape");
+  // YOU CAN IGNORE THE CONNECTION URL BELOW (LINE 41) THAT WAS JUST FOR DELETING STUFF ON A RE-DEPLOYMENT
+  //mongoose.connect('mongodb://heroku_60zpcwg0:ubn0n27pi2856flqoedo9glvh8@ds119578.mlab.com:19578/heroku_60zpcwg0');
+}
+
+
+
+
+
+
+// mongoose.Promise = Promise;
+// mongoose.connect("mongodb://localhost/rollingStoneScrape", {
+  
+// // "mongodb://<dbuser>:<dbpassword>@ds239557.mlab.com:39557/heroku_8tdr566p"
+//   useMongoClient: true
+// });
 // Routes
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {

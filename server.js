@@ -30,13 +30,9 @@ app.use(express.static("public"));
 // app.set("view engine", "handlebars");
 
 
-// if(process.env.NODE_ENV == 'production'){
-//   mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds239557.mlab.com:39557/heroku_8tdr566p');
-// }
-// else{
-//   mongoose.connect("mongodb://localhost/rollingStoneScrape");
-  
-// }
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port 3000", this.address().port, app.settings.env);
+});
 
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p", {

@@ -39,10 +39,10 @@ app.use(express.static("public"));
 // }
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p" {
+mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p", {
   
 // "mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p"
-  
+  useMongoClient: true
 });
 
 

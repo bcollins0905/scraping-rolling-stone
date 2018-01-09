@@ -10,7 +10,7 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
-var PORT = 3000;
+var PORT = process.env.PORT  || 3000 
 // Initialize Express
 var app = express();
 // Configure middleware
@@ -30,9 +30,9 @@ app.use(express.static("public"));
 // app.set("view engine", "handlebars");
 
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port 3000", this.address().port, app.settings.env);
-});
+// app.listen(process.env.PORT || 3000, function(){
+//   console.log("Express server listening on port 3000", this.address().port, app.settings.env);
+// });
 
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p", {
@@ -43,7 +43,7 @@ mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr
 
 
 // Routes
-// A GET route for scraping the echojs website
+// A GET route for scraping the rolling stone website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://www.rollingstone.com/").then(function(response) {

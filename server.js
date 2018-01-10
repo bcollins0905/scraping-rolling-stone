@@ -22,28 +22,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-
-// Set Handlebars.
-// var exphbs = require("express-handlebars");
-
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-
-// app.listen(process.env.PORT || 3000, function(){
-//   console.log("Express server listening on port 3000", this.address().port, app.settings.env);
-// });
-
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p", {
-  
-// "mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p"
+mongoose.connect(process.env.MONGODB_URI, {
+  // "mongodb://scraperDB:abc123@ds239557.mlab.com:39557/heroku_8tdr566p"
   useMongoClient: true
 });
 
-
 // Routes
-// A GET route for scraping the rolling stone website
+// A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://www.rollingstone.com/").then(function(response) {
@@ -68,7 +54,10 @@ app.get("/scrape", function(req, res) {
   
       // result.summary = $(this)
       //   .children(".p")
-    //   // Create a new Article using the `result` object built from scraping
+    // //   // Create a new Article using the `result` object built from scraping
+    //   res.json(err)
+
+
       db.Article
         .create(result)
         .then(function(dbArticle) {
@@ -80,11 +69,9 @@ app.get("/scrape", function(req, res) {
           res.json(err);
         });
       });
-  // console.log(result)
+ 
     });
 })
-
-
 
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {

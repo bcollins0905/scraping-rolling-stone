@@ -68,7 +68,7 @@ app.get("/scrape", function(req, res) {
         .update(result)
         .then(function(dbArticle) {
           // If we were able to successfully scrape and save an Article, send a message to the client
-          res.send(dbArticle);
+          res.send(db.Article.find());
         })
         .catch(function(err) {
           // If an error occurred, send it to the client

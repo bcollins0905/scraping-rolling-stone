@@ -29,10 +29,17 @@ mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
+
+
 // Routes
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
+  $(document).ready(function() {
+    $("#button").click(function(){
+        alert("button");
+    }); 
+});
   axios.get("https://www.rollingstone.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     // console.log(response)
@@ -124,7 +131,7 @@ app.post("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
-});
+  });
 // // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");

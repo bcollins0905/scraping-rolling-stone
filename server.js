@@ -35,14 +35,12 @@ mongoose.connect(MONGODB_URI, {
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  $(document).ready(function() {
-    $("#button").click(function(){
-        alert("button");
-    }); 
-});
+  
   axios.get("https://www.rollingstone.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    // console.log(response)
+    // // Then, we load that into cheerio and save it to $ for a shorthand selector
+    //  console.log(response)
+    
+
     var $ = cheerio.load(response.data);
 
     // // Now, we grab every h2 within an article tag, and do the following:
@@ -67,13 +65,14 @@ app.get("/scrape", function(req, res) {
 
 
       db.Article
-        .create(result)
+        .update(result)
         .then(function(dbArticle) {
           // If we were able to successfully scrape and save an Article, send a message to the client
           res.send("Scrape Complete");
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
+
           res.json(err);
         });
       });
